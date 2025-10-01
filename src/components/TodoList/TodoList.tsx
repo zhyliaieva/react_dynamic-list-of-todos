@@ -1,6 +1,11 @@
 import React from 'react';
+import { Todo } from '../../types/Todo';
+interface TodoListProp {
+  todos?: Todo[];
+  onShow?: (todo: Todo) => void;
+}
 
-export const TodoList: React.FC = () => (
+export const TodoList: React.FC<TodoListProp> = () => (
   <table className="table is-narrow is-fullwidth">
     <thead>
       <tr>

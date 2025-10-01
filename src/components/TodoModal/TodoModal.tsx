@@ -1,7 +1,20 @@
 import React from 'react';
 import { Loader } from '../Loader';
+import { Todo } from '../../types/Todo';
+import { User } from '../../types/User';
 
-export const TodoModal: React.FC = () => {
+type TodoModalProp = {
+  title?: string;
+  completed?: boolean;
+  userName?: string;
+  todo?: Todo | null;
+  user?: User | null;
+  userEmail?: string;
+  isLoading?: boolean;
+  onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+export const TodoModal: React.FC<TodoModalProp> = () => {
   return (
     <div className="modal is-active" data-cy="modal">
       <div className="modal-background" />

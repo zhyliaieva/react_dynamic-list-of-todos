@@ -1,4 +1,12 @@
-export const TodoFilter = () => (
+interface TodoFilterProp {
+  filter?: string;
+  query?: string;
+  onFilterChange?: (filter: string) => void;
+  onQueryChange?: (query: string) => void;
+  onClearQuery?: () => void | undefined;
+}
+
+export const TodoFilter: React.FC<TodoFilterProp> = () => (
   <form className="field has-addons">
     <p className="control">
       <span className="select">
