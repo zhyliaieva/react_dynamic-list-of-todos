@@ -40,6 +40,15 @@ export const App: React.FC = () => {
     })
     .filter(todo => todo.title.toLowerCase().includes(query.toLowerCase()));
 
+  const handleClearQuery = () => {
+    setQuery('');
+    setFilter(Filter.All);
+  };
+
+  const handleQueryChange = (newQuery: string) => {
+    setQuery(newQuery);
+  };
+
   const handleFilterChange = (newFilter: string) => {
     if (newFilter === Filter.Active) {
       setFilter(Filter.Active);
@@ -60,7 +69,7 @@ export const App: React.FC = () => {
         setUser(userFromServer);
       })
       .catch(error => {
-        throw error(error);
+        throw error;
       })
       .finally(() => setUserLoading(false));
   };
@@ -78,7 +87,7 @@ export const App: React.FC = () => {
         setTodos(todosFromServer);
       })
       .catch(error => {
-        throw error(error);
+        throw error;
       })
       .finally(() => setTodosLoading(false));
   }, []);
@@ -96,8 +105,8 @@ export const App: React.FC = () => {
                   filter={filter}
                   query={query}
                   onFilterChange={handleFilterChange}
-                  onQueryChange={setQuery}
-                  onClearQuery={() => setQuery('')}
+                  onQueryChange={handleQueryChange}
+                  onClearQuery={handleClearQuery}
                 />
               )}
             </div>
@@ -105,16 +114,20 @@ export const App: React.FC = () => {
             <div className="block">
               {todosLoading && <Loader />}
               {!todosLoading && (
-                <TodoList todos={filteredTodos} onShow={handleShow} />
+                <TodoList
+                  todos={filteredTodos}
+                  onShow={handleShow}
+                  selectedTodo={selectedTodo}
+                />
               )}
             </div>
 
             {selectedTodo !== null && (
               <TodoModal
-                title={selectedTodo.title}
                 completed={selectedTodo.completed}
-                userName={user?.name}
-                userEmail={user?.email}
+                userName={user ? user.name : 'User'}
+                userEmail={user ? user.email : ''}
+                todo={selectedTodo}
                 isLoading={userLoading}
                 onClose={handleClose}
               />
