@@ -42,7 +42,6 @@ export const App: React.FC = () => {
 
   const handleClearQuery = () => {
     setQuery('');
-    setFilter(Filter.All);
   };
 
   const handleQueryChange = (newQuery: string) => {
@@ -69,7 +68,7 @@ export const App: React.FC = () => {
         setUser(userFromServer);
       })
       .catch(error => {
-        throw error;
+        window.console.error(error);
       })
       .finally(() => setUserLoading(false));
   };
@@ -87,7 +86,7 @@ export const App: React.FC = () => {
         setTodos(todosFromServer);
       })
       .catch(error => {
-        throw error;
+        window.console.error(error);
       })
       .finally(() => setTodosLoading(false));
   }, []);

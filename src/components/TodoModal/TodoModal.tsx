@@ -21,7 +21,7 @@ export const TodoModal: React.FC<TodoModalProp> = ({
 }) => {
   return (
     <div className="modal is-active" data-cy="modal">
-      <div className="modal-background" />
+      <div className="modal-background" onClick={onClose} />
 
       {isLoading ? (
         <Loader />
@@ -32,16 +32,11 @@ export const TodoModal: React.FC<TodoModalProp> = ({
               className="modal-card-title has-text-weight-medium"
               data-cy="modal-header"
             >
-              {todo && 'Todo #' + +todo.id}
+              {todo && `Todo #${todo.id}`}
             </div>
 
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <button
-              type="button"
-              className="delete"
-              data-cy="modal-close"
-              onClick={onClose}
-            />
+            <button type="button" className="delete" data-cy="modal-close" />
           </header>
 
           <div className="modal-card-body">

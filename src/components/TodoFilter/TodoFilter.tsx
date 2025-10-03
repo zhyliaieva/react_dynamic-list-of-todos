@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 interface TodoFilterProp {
   filter: string;
   query: string;
@@ -48,7 +50,14 @@ export const TodoFilter: React.FC<TodoFilterProp> = ({
         {query && (
           <button
             type="button"
-            className="delete is-small"
+            className={classNames(
+              'button',
+              'is-white',
+              'is-small',
+              'is-rounded',
+            )}
+            style={{ boxShadow: `none`, pointerEvents: `all` }}
+            aria-label="clear search"
             data-cy="clearSearchButton"
             onClick={onClearQuery}
           />
